@@ -11,6 +11,11 @@ function HomePage() {
   const [page, setPage] = useState(1);
   const [currency, setCurrency] = useState("usd");
   const [chart, setChart] = useState(null);
+  const currencySymbols = {
+    usd: "$",
+    eur: "€",
+    jpy: "¥",
+  };
   useEffect(() => {
     setIsLoading(true);
     const getData = async () => {
@@ -29,7 +34,12 @@ function HomePage() {
   return (
     <div>
       <Search currency={currency} setCurrency={setCurrency} />
-      <TableCoin coins={coins} isLoading={isLoading} setChart={setChart} />
+      <TableCoin
+        coins={coins}
+        isLoading={isLoading}
+        setChart={setChart}
+        currencySymbol={currencySymbols[currency]}
+      />
       <Pagination page={page} setPage={setPage} />
       {!!chart && <Chart chart={chart} setChart={setChart} />}
     </div>
